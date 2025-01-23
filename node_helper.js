@@ -20,7 +20,7 @@ module.exports = NodeHelper.create({
         });
 
         // Start server
-        this.expressApp.listen(8080, () => {
+        this.expressApp.listen(3000, () => {
             console.log("MMM-HealthKit helper listening on port 8080.");
         });
     },
