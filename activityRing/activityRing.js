@@ -31,7 +31,7 @@ function createActivityRing(exerciseMinutes, exerciseGoal, ringColor) {
             <circle class="progress-ring-fill" cx="60" cy="60" r="50"
                 stroke-dasharray="314" stroke-dashoffset="314" style="stroke: ${ringColor};" />
             <circle class="progress-ring-overflow" cx="60" cy="60" r="50"
-                stroke-dasharray="314" stroke-dashoffset="314" />
+                stroke-dasharray="314" stroke-dashoffset="314" style="stroke: ${ringColor}; stroke-linecap: round; filter: drop-shadow(2px 2px 4px color);" />
             <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="progress-text">
                 <tspan id="exercise-text">${exerciseMinutes}</tspan> / <tspan id="goal-text">${exerciseGoal}</tspan>
             </text>
