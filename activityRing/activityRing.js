@@ -37,7 +37,7 @@ export function createActivityRing(exerciseMinutes, exerciseGoal) {
         </svg>
     `;
 
-    const ring = document.querySelector(".progress-ring-fill");
+    /*const ring = document.querySelector(".progress-ring-fill");
     const overflowRing = document.querySelector(".progress-ring-overflow");
     const exerciseText = document.getElementById("exercise-text");
     const goalText = document.getElementById("goal-text");
@@ -78,6 +78,7 @@ export function createActivityRing(exerciseMinutes, exerciseGoal) {
 
         overflowRing.style.stroke = "#ff9900"; // Orange
     }
+        */
 
     return container;
 }
