@@ -6,7 +6,7 @@ Module.register("MMM-HealthKit", {
    
     // Config 
     defaults: {
-        updateInterval: 60000,
+        updateInterval: 10000,
         serverURL: "http://localhost:3000/healthData"
     },
     getScripts: function () {
