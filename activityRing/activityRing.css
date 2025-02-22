@@ -1,5 +1,5 @@
 .rings-container {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     justify-content: center;
     align-items: center;
