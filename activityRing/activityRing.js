@@ -1,3 +1,4 @@
+
 function animateProgress(ring, fromOffset, toOffset, duration, callback) {
     let start = null;
 
@@ -24,7 +25,7 @@ export function createActivityRing(exerciseMinutes, exerciseGoal) {
     const container = document.createElement("div");
     container.classList.add("progress-container");
 
-    container.innerHTML = `
+    /*container.innerHTML = `
         <svg class="progress-ring" width="120" height="120">
             <circle class="progress-ring-bg" cx="60" cy="60" r="50" />
             <circle class="progress-ring-fill" cx="60" cy="60" r="50"
@@ -36,6 +37,7 @@ export function createActivityRing(exerciseMinutes, exerciseGoal) {
             </text>
         </svg>
     `;
+    */
 
     /*const ring = document.querySelector(".progress-ring-fill");
     const overflowRing = document.querySelector(".progress-ring-overflow");
