@@ -13,6 +13,9 @@ Module.register("MMM-HealthKit", {
             this.file("activityRing/activityRing.js")
         ];
     },
+    getStyles: function () {
+        return [this.file("activityRing/activityRing.css")]
+    },
 
     // Setup
     start: function () {
