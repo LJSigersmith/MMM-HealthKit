@@ -97,8 +97,8 @@ Module.register("MMM-HealthKit", {
         wrapper.appendChild(macroBar);
 
         // ACTIVITY RINGS
-        //const exerciseRingElement = createActivityRing(moveValue, moveGoal);
-        //wrapper.appendChild(exerciseRingElement);
+        const exerciseRingElement = createActivityRing(moveValue, moveGoal);
+        wrapper.appendChild(exerciseRingElement);
 
         return wrapper;
         /*
