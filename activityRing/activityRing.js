@@ -1,5 +1,5 @@
 
-/*function animateProgress(ring, fromOffset, toOffset, duration, callback) {
+function animateProgress(ring, fromOffset, toOffset, duration, callback) {
     let start = null;
 
     function step(timestamp) {
@@ -19,14 +19,13 @@
 
     requestAnimationFrame(step);
 }
-    */
 
-//export function createActivityRing(exerciseMinutes, exerciseGoal) {
+export function createActivityRing(exerciseMinutes, exerciseGoal) {
 
     //const container = document.createElement("div");
     //container.classList.add("progress-container");
 
-    /*container.innerHTML = `
+    container.innerHTML = `
         <svg class="progress-ring" width="120" height="120">
             <circle class="progress-ring-bg" cx="60" cy="60" r="50" />
             <circle class="progress-ring-fill" cx="60" cy="60" r="50"
@@ -38,9 +37,8 @@
             </text>
         </svg>
     `;
-    */
 
-    /*const ring = document.querySelector(".progress-ring-fill");
+    const ring = document.querySelector(".progress-ring-fill");
     const overflowRing = document.querySelector(".progress-ring-overflow");
     const exerciseText = document.getElementById("exercise-text");
     const goalText = document.getElementById("goal-text");
@@ -81,10 +79,9 @@
 
         overflowRing.style.stroke = "#ff9900"; // Orange
     }
-        */
 
-    //return container;
-//}
+    return container;
+}
 
 // Example: Try different values
 //updateExerciseRing(100, 60); // 200% progress

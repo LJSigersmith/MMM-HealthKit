@@ -1,8 +1,6 @@
 // Frontend module
 // Integrates with MagicMirror
 // Displays Data
-const { createActivityRing } = require("./activityRing/activityRing.js");
-
 Module.register("MMM-HealthKit", {
    
     // Config 
@@ -12,7 +10,7 @@ Module.register("MMM-HealthKit", {
     },
     getScripts: function () {
         return [
-            this.file("chart.min.js") // Path to Chart.js
+            this.file("activityRing/activityRing.js")
         ];
     },
 
