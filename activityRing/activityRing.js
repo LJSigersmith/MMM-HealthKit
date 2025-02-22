@@ -40,37 +40,43 @@ function createActivityRing(exerciseMinutes, exerciseGoal, baseColor) {
     const container = document.createElement("div");
     container.classList.add("progress-container");
 
-    const gradientID = `gradient-${Math.random().toString(36).substring(2, 9)}`;
+    // Create a unique gradient ID
+    const gradientId = `gradient-${Math.random().toString(36).substr(2, 9)}`;
+    const shadowId = `shadow-${Math.random().toString(36).substr(2, 9)}`;
 
-    /*container.innerHTML = `
-        <svg class="progress-ring" width="120" height="120">
-            <circle class="progress-ring-bg" cx="60" cy="60" r="50" />
-            <circle class="progress-ring-fill" cx="60" cy="60" r="50"
-                stroke-dasharray="314" stroke-dashoffset="314" />
-            <circle class="progress-ring-overflow" cx="60" cy="60" r="50"
-                stroke-dasharray="314" stroke-dashoffset="314" />
-            <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="progress-text">
-                <tspan id="exercise-text">${exerciseMinutes}</tspan> / <tspan id="goal-text">${exerciseGoal}</tspan>
-            </text>
-        </svg>
-    `;*/
     container.innerHTML = `
         <svg class="progress-ring" width="120" height="120">
             <defs>
-                <linearGradient id="${gradientID}" x1="0%" y1="0%" x2="100%" y2="0%">
+                <!-- Gradient for the ring -->
+                <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="${baseColor}" />
                     <stop offset="100%" stop-color="${adjustBrightness(baseColor, 50)}" />
                 </linearGradient>
+
+                <!-- Radial gradient for endpoint glow -->
+                <radialGradient id="${shadowId}" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="${adjustBrightness(baseColor, 100)}" />
+                    <stop offset="100%" stop-color="transparent" />
+                </radialGradient>
             </defs>
+
             <circle class="progress-ring-bg" cx="60" cy="60" r="50" />
             <circle class="progress-ring-fill" cx="60" cy="60" r="50"
-                stroke="url(#${gradientID})"
+                stroke="url(#${gradientId})"
                 stroke-dasharray="314" stroke-dashoffset="314"
-                stroke-linecap="round" />
+                stroke-linecap="round"
+                filter="drop-shadow(2px 2px 4px ${baseColor})" />
+            
+            <!-- Glow effect at the endpoint -->
+            <circle class="progress-ring-end" cx="60" cy="10" r="5"
+                fill="url(#${shadowId})" opacity="0" />
+
             <circle class="progress-ring-overflow glow" cx="60" cy="60" r="50"
-                stroke="url(#${gradientID})"
+                stroke="url(#${gradientId})"
                 stroke-dasharray="314" stroke-dashoffset="314"
-                stroke-linecap="round" />
+                stroke-linecap="round"
+                filter="drop-shadow(3px 3px 5px ${baseColor})" />
+
             <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="progress-text">
                 <tspan id="exercise-text">${exerciseMinutes}</tspan> / <tspan id="goal-text">${exerciseGoal}</tspan>
             </text>
@@ -79,6 +85,7 @@ function createActivityRing(exerciseMinutes, exerciseGoal, baseColor) {
 
     const ring = container.querySelector(".progress-ring-fill");
     const overflowRing = container.querySelector(".progress-ring-overflow");
+    const endGlow = container.querySelector(".progress-ring-end");
 
     if (!ring) {
         console.error("❌ ERROR: .progress-ring-fill element not found!");
@@ -92,13 +99,17 @@ function createActivityRing(exerciseMinutes, exerciseGoal, baseColor) {
 
     if (percentage <= 100) {
         animateProgress(ring, circumference, newOffset, 1000);
-        overflowRing.style.opacity = "0"; 
+        overflowRing.style.opacity = "0";
+        setTimeout(() => {
+            endGlow.style.opacity = "1"; // Show endpoint glow
+        }, 900);
     } else {
         animateProgress(ring, circumference, 0, 1000, () => {
             setTimeout(() => {
-                overflowRing.style.opacity = "1";  // 🔥 Show overflow with glow effect
+                overflowRing.style.opacity = "1";
                 let overflowOffset = circumference - ((percentage - 100) / 100 * circumference);
                 animateProgress(overflowRing, circumference, overflowOffset, 1000);
+                endGlow.style.opacity = "1"; // Show endpoint glow after overflow starts
             }, 500);
         });
     }

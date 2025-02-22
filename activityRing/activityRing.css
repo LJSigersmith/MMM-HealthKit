@@ -52,5 +52,9 @@
 }
 
 .glow {
-    filter: drop-shadow(2px 2px 4px var(--ring-color));
+    filter: drop-shadow(3px 3px 6px var(--ring-color));
+}
+
+.progress-ring-end {
+    transition: opacity 0.3s ease-in-out;
 }
