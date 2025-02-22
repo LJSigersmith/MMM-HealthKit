@@ -58,9 +58,13 @@ Module.register("MMM-HealthKit", {
             ? `${this.healthData.activityRings.stand.value} / ${this.healthData.activityRings.stand.goal}`
             : "N/A";
         
-            const fat = this.healthData.macros?.fat || 0;
+        const fat = this.healthData.macros?.fat || 0;
         const protein = this.healthData.macros?.protein || 0;
         const carbs = this.healthData.macros?.carb || 0;
+
+        const fatPercent = fat / 100;
+        const proteinPercent = protein / 100;
+        const carbPercent = carbs / 100;
         
         // Create a container for the health data
         const dataContainer = document.createElement("div");
@@ -84,9 +88,9 @@ Module.register("MMM-HealthKit", {
         const macroBar = document.createElement("div");
         macroBar.innerHTML = `
             <div style="display: flex; width: 100%; height: 20px; border-radius: 5px; overflow: hidden; border: 1px solid #ccc;">
-                <div style="width: 20%; background-color: orange;"></div>
-                <div style="width: 40%; background-color: yellow;"></div>
-                <div style="width: 40%; background-color: blue;"></div>
+                <div style="width: ${fatPercent}%; background-color: orange;"></div>
+                <div style="width: ${proteinPercent}%; background-color: yellow;"></div>
+                <div style="width: ${carbPercent}%; background-color: blue;"></div>
             </div>
         `;
         wrapper.appendChild(macroBar);
