@@ -31,7 +31,7 @@
     stroke-linecap: round;
     transition: stroke-dashoffset 1s ease-in-out, opacity 0.5s ease-in-out; /* 🔥 Animate both stroke and opacity */
     opacity: 0; /* 🔥 Initially hidden */
-    filet: drop-shadow(0px 0px 5px #ffcc00);
+    filter: drop-shadow(0px 0px 5px #ffcc00);
 }
 
 .progress-text {
