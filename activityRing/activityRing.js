@@ -1,5 +1,5 @@
 
-function animateProgress(ring, fromOffset, toOffset, duration, callback) {
+/*function animateProgress(ring, fromOffset, toOffset, duration, callback) {
     let start = null;
 
     function step(timestamp) {
@@ -19,11 +19,12 @@ function animateProgress(ring, fromOffset, toOffset, duration, callback) {
 
     requestAnimationFrame(step);
 }
+    */
 
-export function createActivityRing(exerciseMinutes, exerciseGoal) {
+//export function createActivityRing(exerciseMinutes, exerciseGoal) {
 
-    const container = document.createElement("div");
-    container.classList.add("progress-container");
+    //const container = document.createElement("div");
+    //container.classList.add("progress-container");
 
     /*container.innerHTML = `
         <svg class="progress-ring" width="120" height="120">
@@ -82,8 +83,8 @@ export function createActivityRing(exerciseMinutes, exerciseGoal) {
     }
         */
 
-    return container;
-}
+    //return container;
+//}
 
 // Example: Try different values
 //updateExerciseRing(100, 60); // 200% progress
