@@ -1,0 +1,38 @@
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*.progress-ring {
+    transform: rotate(0deg); /* Rotates the ring so it starts from the top 
+}*/
+
+.progress-ring-bg {
+    fill: none;
+    stroke: #ddd;
+    stroke-width: 10;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: #00cc66; /* Green */
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease-in-out; /* 🔥 Smooth animation */
+}
+
+.progress-ring-overflow {
+    fill: none;
+    stroke: #ff9900; /* Orange for overflow */
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease-in-out, opacity 0.5s ease-in-out; /* 🔥 Animate both stroke and opacity */
+    opacity: 0; /* 🔥 Initially hidden */
+}
+
+.progress-text {
+    font-size: 16px;
+    font-weight: bold;
+    fill: black;
+}
