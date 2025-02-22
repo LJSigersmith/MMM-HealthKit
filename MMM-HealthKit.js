@@ -1,7 +1,7 @@
 // Frontend module
 // Integrates with MagicMirror
 // Displays Data
-import { createActivityRing } from "./activityRing/activityRing.js";
+const { createActivityRing } = require("./activityRing/activityRing.js");
 
 Module.register("MMM-HealthKit", {
    
