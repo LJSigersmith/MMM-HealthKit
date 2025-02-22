@@ -41,7 +41,7 @@ function createActivityRing(exerciseMinutes, exerciseGoal) {
     const ring = container.querySelector(".progress-ring-fill");
     const overflowRing = container.querySelector(".progress-ring-overflow");
     const exerciseText = container.querySelector("#exercise-text");
-    const goalText = container.getElementById("#goal-text");
+    const goalText = container.querySelector("#goal-text");
 
     const radius = 50;
     const circumference = 2 * Math.PI * radius;
