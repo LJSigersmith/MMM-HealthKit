@@ -81,16 +81,15 @@ Module.register("MMM-HealthKit", {
         `;
         wrapper.appendChild(dataContainer);
 
-        /*const macroBar = document.createElement("div");
+        const macroBar = document.createElement("div");
         macroBar.innerHTML = `
             <div style="display: flex; width: 100%; height: 20px; border-radius: 5px; overflow: hidden; border: 1px solid #ccc;">
-                <div style="width: ${fat}%; background-color: orange;"></div>
-                <div style="width: ${protein}%; background-color: yellow;"></div>
-                <div style="width: ${carb}%; background-color: blue;"></div>
+                <div style="width: 20%; background-color: orange;"></div>
+                <div style="width: 40%; background-color: yellow;"></div>
+                <div style="width: 40%; background-color: blue;"></div>
             </div>
         `;
         wrapper.appendChild(macroBar);
-        */
 
         return wrapper;
         /*
@@ -107,7 +106,5 @@ Module.register("MMM-HealthKit", {
         wrapper.appendChild(dataContainer);
         */
 
-
-        return wrapper;
     },
 });    
