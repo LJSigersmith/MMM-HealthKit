@@ -81,7 +81,8 @@ Module.register("MMM-HealthKit", {
         `;
         wrapper.appendChild(dataContainer);
 
-        const macroBar = `
+        const macroBar = document.createElement("div");
+        macroBar.innerHTML = `
             <div style="display: flex; width: 100%; height: 20px; border-radius: 5px; overflow: hidden; border: 1px solid #ccc;">
                 <div style="width: ${fat}%; background-color: orange;"></div>
                 <div style="width: ${protein}%; background-color: yellow;"></div>
