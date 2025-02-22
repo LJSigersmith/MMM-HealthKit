@@ -81,7 +81,7 @@ Module.register("MMM-HealthKit", {
         `;
         wrapper.appendChild(dataContainer);
 
-        const macroBar = document.createElement("div");
+        /*const macroBar = document.createElement("div");
         macroBar.innerHTML = `
             <div style="display: flex; width: 100%; height: 20px; border-radius: 5px; overflow: hidden; border: 1px solid #ccc;">
                 <div style="width: ${fat}%; background-color: orange;"></div>
@@ -90,6 +90,7 @@ Module.register("MMM-HealthKit", {
             </div>
         `;
         wrapper.appendChild(macroBar);
+        */
 
         return wrapper;
         /*
