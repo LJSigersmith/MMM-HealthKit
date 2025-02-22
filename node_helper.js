@@ -1,7 +1,11 @@
+// Backend helper file
+// Handles communication between frontend and external data
 
+// Imports & Setup
 const NodeHelper = require("node_helper");
-const axios = require("axios");
-const { spawn } = require("child_process");
+const axios = require("axios"); // HTTP requests
+const { spawn } = require("child_process"); // External server.js process
+
 
 module.exports = NodeHelper.create({
     start: function () {
@@ -29,7 +33,6 @@ module.exports = NodeHelper.create({
         });
 
     },
-
     stop: function () {
         if (this.serverProcess) {
             console.log("Stopping server...");
@@ -37,9 +40,8 @@ module.exports = NodeHelper.create({
             this.serverProcess = null;
         }
     },
-
-
     socketNotificationReceived: function (notification, payload) {
+        // Wait for REQUEST_HEALTH_DATa from frontend
         if (notification === "REQUEST_HEALTH_DATA") {
             console.log("Received REQUEST_HEALTH_DATA notification.");
 

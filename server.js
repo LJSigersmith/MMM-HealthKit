@@ -1,3 +1,4 @@
+// server for handling requests to fetch data
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -28,17 +29,11 @@ app.post("/healthData", (req, res) => {
 });
 
 app.get("/healthData", (req,res) => {
-
     if (Object.keys(latestHealthData).length > 0) {
         res.status(200).json(latestHealthData);
     } else {
         res.status(404).send({ message: "No data available"});
     }
-    //if (latestHealthData) {
-    //    res.status(200).json(latestHealthData);
-    //} else {
-    //    res.status(404).send({ message: "No data available"});
-    //}
 });
 
 // Start server
