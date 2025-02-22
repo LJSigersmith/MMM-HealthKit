@@ -38,10 +38,10 @@ function createActivityRing(exerciseMinutes, exerciseGoal) {
         </svg>
     `;
 
-    const ring = document.querySelector(".progress-ring-fill");
-    const overflowRing = document.querySelector(".progress-ring-overflow");
-    const exerciseText = document.getElementById("exercise-text");
-    const goalText = document.getElementById("goal-text");
+    const ring = container.querySelector(".progress-ring-fill");
+    const overflowRing = container.querySelector(".progress-ring-overflow");
+    const exerciseText = container.getElementById("exercise-text");
+    const goalText = container.getElementById("goal-text");
 
     const radius = 50;
     const circumference = 2 * Math.PI * radius;
@@ -50,8 +50,8 @@ function createActivityRing(exerciseMinutes, exerciseGoal) {
     let newOffset = circumference - (percentage / 100) * circumference;
 
     // Update text inside the ring
-    //exerciseText.textContent = exerciseMinutes;
-    //goalText.textContent = exerciseGoal;
+    exerciseText.textContent = exerciseMinutes;
+    goalText.textContent = exerciseGoal;
 
     if (percentage <= 100) {
         // Only animate the green ring up to 100%
