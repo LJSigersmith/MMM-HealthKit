@@ -22,8 +22,8 @@ function animateProgress(ring, fromOffset, toOffset, duration, callback) {
 
 function createActivityRing(exerciseMinutes, exerciseGoal) {
 
-    //const container = document.createElement("div");
-    //container.classList.add("progress-container");
+    const container = document.createElement("div");
+    container.classList.add("progress-container");
 
     container.innerHTML = `
         <svg class="progress-ring" width="120" height="120">
