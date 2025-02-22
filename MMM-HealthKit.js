@@ -14,7 +14,7 @@ Module.register("MMM-HealthKit", {
         ];
     },
     getStyles: function () {
-        return [this.file("activityRing/activityRing.css")]
+        return [this.file("activityRing/activityRing.css")];
     },
 
     // Setup
@@ -100,14 +100,19 @@ Module.register("MMM-HealthKit", {
         wrapper.appendChild(macroBar);
 
         // ACTIVITY RINGS
+        const ringsContainer = document.createElement("div");
+        ringsContainer.classList.add("rings-container");
+
         const moveRingElement = createActivityRing(moveValue, moveGoal);
-        wrapper.appendChild(moveRingElement);
+        ringsContainer.appendChild(moveRingElement);
 
         const exerciseRingElement = createActivityRing(exerciseValue, exerciseGoal);
-        wrapper.appendChild(exerciseRingElement);
+        ringsContainer.appendChild(exerciseRingElement);
 
         const standRingElement = createActivityRing(standValue, standGoal);
-        wrapper.appendChild(standRingElement);
+        ringsContainer.appendChild(standRingElement);
+
+        wrapper.appendChild(ringsContainer);
 
         
 
