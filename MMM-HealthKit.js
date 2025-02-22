@@ -1,6 +1,7 @@
 // Frontend module
 // Integrates with MagicMirror
 // Displays Data
+import {createActivityRing } from "activityRing/activityRing.js";
 
 Module.register("MMM-HealthKit", {
    
@@ -48,14 +49,21 @@ Module.register("MMM-HealthKit", {
 
         // Display health data
         const { activityRings, latestHeartRate, weightData, caloriesConsumed, macros, sleepHours } = this.healthData;
+        const moveValue = this.healthData.activityRings.move.value;
+        const moveGoal = this.healthData.activityRings.move.goal;
+        const exerciseValue = this.healthData.activityRings.exercise.value;
+        const exerciseGoal = this.healthData.activityRings.exercise.goal;
+        const standValue = this.healthData.activityRings.stand.value;
+        const standGoal = this.healthData.activityRings.stand.goal;
+
         const move = this.healthData.activityRings?.move
-            ? `${this.healthData.activityRings.move.value} / ${this.healthData.activityRings.move.goal}`
+            ? `${moveValue} / ${moveGoal}`
             : "N/A";
         const exercise = this.healthData.activityRings?.exercise
-            ? `${this.healthData.activityRings.exercise.value} / ${this.healthData.activityRings.exercise.goal}`
+            ? `${exerciseValue} / ${exerciseGoal}`
             : "N/A";
         const stand = this.healthData.activityRings?.stand
-            ? `${this.healthData.activityRings.stand.value} / ${this.healthData.activityRings.stand.goal}`
+            ? `${standValue} / ${standGoal}`
             : "N/A";
         
         const fat = this.healthData.macros?.fat || 0;
@@ -72,12 +80,6 @@ Module.register("MMM-HealthKit", {
             <div>
                 <h3>HealthKit Data</h3>
                 
-                ${activityRings ? `
-                    <p>Move: ${move} kcal</p>
-                    <p>Exercise: ${exercise} min</p>
-                    <p>Stand: ${stand} hours</p>
-                ` : ""}
-                
                 ${latestHeartRate ? `<p>Heart Rate: ${latestHeartRate} BPM</p>` : ""}
                 
                 ${caloriesConsumed ? `<p>Calories Consumed: ${caloriesConsumed.toFixed(0)} kcal</p>` : ""}
@@ -85,6 +87,7 @@ Module.register("MMM-HealthKit", {
         `;
         wrapper.appendChild(dataContainer);
 
+        // MACRO BAR
         const macroBar = document.createElement("div");
         macroBar.innerHTML = `
             <div style="display: flex; width: 100%; height: 20px; border-radius: 5px; overflow: hidden; border: 1px solid #ccc;">
@@ -94,6 +97,10 @@ Module.register("MMM-HealthKit", {
             </div>
         `;
         wrapper.appendChild(macroBar);
+
+        // ACTIVITY RINGS
+        const exerciseRingElement = createActivityRing(moveValue, moveGoal);
+        wrapper.appendChild(exerciseRingElement);
 
         return wrapper;
         /*
