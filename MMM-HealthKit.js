@@ -48,12 +48,16 @@ Module.register("MMM-HealthKit", {
 
         // Display health data
         const { activityRings, latestHeartRate, weightData, caloriesConsumed, macros, sleepHours } = this.healthData;
-        console.log("Activity Rings: ", this.healthData.activityRings);
-        console.log("Latest Heart Rate: ", this.healthData.latestHeartRate);
-        console.log("Calories Consumed: ", this.healthData.caloriesConsumed);
-        console.log("Macros: ", this.healthData.macros);
-        console.log("SLeep Hours: ", this.healthData.sleepHours);
-
+        const move = this.healthData.activityRings?.move
+            ? `${this.healthData.activityRings.move.value} / ${this.healthData.activityRings.move.goal}`
+            : "N/A";
+        const exercise = this.healthData.activityRings?.exercise
+            ? `${this.healthData.activityRings.exercise.value} / ${this.healthData.activityRings.exercise.goal}`
+            : "N/A";
+        const stand = this.healthData.activityRings?.stand
+            ? `${this.healthData.activityRings.stand.value} / ${this.healthData.activityRings.stand.goal}`
+            : "N/A";
+        
         // Create a container for the health data
         const dataContainer = document.createElement("div");
         dataContainer.innerHTML = `
@@ -61,9 +65,9 @@ Module.register("MMM-HealthKit", {
                 <h3>HealthKit Data</h3>
                 
                 ${activityRings ? `
-                    <p>Move: ${activityRings.move[0]} / ${activityRings.move[1]} kcal</p>
-                    <p>Exercise: ${activityRings.exercise[0]} / ${activityRings.exercise[1]} min</p>
-                    <p>Stand: ${activityRings.stand[0]} / ${activityRings.stand[1]} hours</p>
+                    <p>Move: ${move} kcal</p>
+                    <p>Exercise: ${exercise} min</p>
+                    <p>Stand: ${stand} hours</p>
                 ` : ""}
                 
                 ${latestHeartRate ? `<p>Heart Rate: ${latestHeartRate} BPM</p>` : ""}
