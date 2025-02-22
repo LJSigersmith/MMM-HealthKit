@@ -35,7 +35,7 @@ function adjustBrightness(hex, percent) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-function createActivityRing(exerciseMinutes, exerciseGoal, ringColor) {
+function createActivityRing(exerciseMinutes, exerciseGoal, baseColor) {
 
     const container = document.createElement("div");
     container.classList.add("progress-container");
@@ -79,31 +79,24 @@ function createActivityRing(exerciseMinutes, exerciseGoal, ringColor) {
 
     const ring = container.querySelector(".progress-ring-fill");
     const overflowRing = container.querySelector(".progress-ring-overflow");
-    ring.style.stroke = ringColor;
-    overflowRing.style.stroke = ringColor;
-    overflowRing.style.setProperty("--ring-color", ringColor);
 
-    const exerciseText = container.querySelector("#exercise-text");
-    const goalText = container.querySelector("#goal-text");
+    if (!ring) {
+        console.error("❌ ERROR: .progress-ring-fill element not found!");
+        return container;
+    }
 
     const radius = 50;
     const circumference = 2 * Math.PI * radius;
-
     let percentage = (exerciseMinutes / exerciseGoal) * 100;
     let newOffset = circumference - (percentage / 100) * circumference;
 
-    // Update text inside the ring
-    exerciseText.textContent = exerciseMinutes;
-    goalText.textContent = exerciseGoal;
-
     if (percentage <= 100) {
-        // Only animate the green ring up to 100%
-        animateProgress(ring,circumference, newOffset, 1000);
-        overflowRing.style.opacity = "0";
+        animateProgress(ring, circumference, newOffset, 1000);
+        overflowRing.style.opacity = "0"; 
     } else {
         animateProgress(ring, circumference, 0, 1000, () => {
             setTimeout(() => {
-                overflowRing.style.opacity = "1";
+                overflowRing.style.opacity = "1";  // 🔥 Show overflow with glow effect
                 let overflowOffset = circumference - ((percentage - 100) / 100 * circumference);
                 animateProgress(overflowRing, circumference, overflowOffset, 1000);
             }, 500);
