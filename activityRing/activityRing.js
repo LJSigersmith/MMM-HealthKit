@@ -40,7 +40,7 @@ function createActivityRing(exerciseMinutes, exerciseGoal, baseColor) {
     const container = document.createElement("div");
     container.classList.add("progress-container");
 
-    // Create a unique gradient ID
+    // Create unique IDs for the gradient and shadow
     const gradientId = `gradient-${Math.random().toString(36).substr(2, 9)}`;
     const shadowId = `shadow-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -69,7 +69,7 @@ function createActivityRing(exerciseMinutes, exerciseGoal, baseColor) {
             
             <!-- Glow effect at the endpoint -->
             <circle class="progress-ring-end" cx="60" cy="10" r="5"
-                fill="url(#${shadowId})" opacity="0" />
+                fill="url(#${shadowId})" opacity="1" />
 
             <circle class="progress-ring-overflow glow" cx="60" cy="60" r="50"
                 stroke="url(#${gradientId})"
@@ -97,19 +97,45 @@ function createActivityRing(exerciseMinutes, exerciseGoal, baseColor) {
     let percentage = (exerciseMinutes / exerciseGoal) * 100;
     let newOffset = circumference - (percentage / 100) * circumference;
 
+    function updateGlowPosition(progress) {
+        const angle = (progress / 100) * 360; // Convert progress to degrees
+        const radians = (angle - 90) * (Math.PI / 180); // Convert degrees to radians (starting at top)
+        const glowX = 60 + Math.cos(radians) * radius;
+        const glowY = 60 + Math.sin(radians) * radius;
+        endGlow.setAttribute("cx", glowX);
+        endGlow.setAttribute("cy", glowY);
+    }
+
+    function animateRing(ringElement, startOffset, endOffset, duration, callback) {
+        let startTime = null;
+
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            let progress = (timestamp - startTime) / duration;
+            let easedProgress = Math.min(progress, 1);
+            let currentOffset = startOffset + (endOffset - startOffset) * easedProgress;
+
+            ringElement.style.strokeDashoffset = currentOffset;
+            updateGlowPosition((1 - currentOffset / circumference) * 100);
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else if (callback) {
+                callback();
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+
     if (percentage <= 100) {
-        animateProgress(ring, circumference, newOffset, 1000);
-        overflowRing.style.opacity = "0";
-        setTimeout(() => {
-            endGlow.style.opacity = "1"; // Show endpoint glow
-        }, 900);
+        animateRing(ring, circumference, newOffset, 1000);
     } else {
-        animateProgress(ring, circumference, 0, 1000, () => {
+        animateRing(ring, circumference, 0, 1000, () => {
             setTimeout(() => {
                 overflowRing.style.opacity = "1";
                 let overflowOffset = circumference - ((percentage - 100) / 100 * circumference);
-                animateProgress(overflowRing, circumference, overflowOffset, 1000);
-                endGlow.style.opacity = "1"; // Show endpoint glow after overflow starts
+                animateRing(overflowRing, circumference, overflowOffset, 1000);
             }, 500);
         });
     }
