@@ -100,8 +100,16 @@ Module.register("MMM-HealthKit", {
         wrapper.appendChild(macroBar);
 
         // ACTIVITY RINGS
-        const exerciseRingElement = createActivityRing(moveValue, moveGoal);
+        const moveRingElement = createActivityRing(moveValue, moveGoal);
+        wrapper.appendChild(moveRingElement);
+
+        const exerciseRingElement = createActivityRing(exerciseValue, exerciseGoal);
         wrapper.appendChild(exerciseRingElement);
+
+        const standRingElement = createActivityRing(standValue, standGoal);
+        wrapper.appendChild(standRingElement);
+
+        
 
         return wrapper;
         /*
