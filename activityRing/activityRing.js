@@ -20,7 +20,7 @@ function animateProgress(ring, fromOffset, toOffset, duration, callback) {
     requestAnimationFrame(step);
 }
 
-function createActivityRing(exerciseMinutes, exerciseGoal) {
+function createActivityRing(exerciseMinutes, exerciseGoal, ringColor) {
 
     const container = document.createElement("div");
     container.classList.add("progress-container");
@@ -29,11 +29,11 @@ function createActivityRing(exerciseMinutes, exerciseGoal) {
         <svg class="progress-ring" width="120" height="120">
             <circle class="progress-ring-bg" cx="60" cy="60" r="50" />
             <circle class="progress-ring-fill" cx="60" cy="60" r="50"
-                stroke-dasharray="314" stroke-dashoffset="314" />
+                stroke-dasharray="314" stroke-dashoffset="314" style="stroke: ${ringColor};" />
             <circle class="progress-ring-overflow" cx="60" cy="60" r="50"
                 stroke-dasharray="314" stroke-dashoffset="314" />
             <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="progress-text">
-                <tspan id="exercise-text">20</tspan> / <tspan id="goal-text">20</tspan>
+                <tspan id="exercise-text">${exerciseMinutes}</tspan> / <tspan id="goal-text">${exerciseGoal}</tspan>
             </text>
         </svg>
     `;
