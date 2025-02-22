@@ -103,13 +103,13 @@ Module.register("MMM-HealthKit", {
         const ringsContainer = document.createElement("div");
         ringsContainer.classList.add("rings-container");
 
-        const moveRingElement = createActivityRing(moveValue, moveGoal);
+        const moveRingElement = createActivityRing(moveValue, moveGoal, "#ff3457");
         ringsContainer.appendChild(moveRingElement);
 
-        const exerciseRingElement = createActivityRing(exerciseValue, exerciseGoal);
+        const exerciseRingElement = createActivityRing(exerciseValue, exerciseGoal, "#34ff3e");
         ringsContainer.appendChild(exerciseRingElement);
 
-        const standRingElement = createActivityRing(standValue, standGoal);
+        const standRingElement = createActivityRing(standValue, standGoal, "#34b4ff");
         ringsContainer.appendChild(standRingElement);
 
         wrapper.appendChild(ringsContainer);
