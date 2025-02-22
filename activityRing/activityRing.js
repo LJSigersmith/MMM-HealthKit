@@ -50,8 +50,8 @@ function createActivityRing(exerciseMinutes, exerciseGoal) {
     let newOffset = circumference - (percentage / 100) * circumference;
 
     // Update text inside the ring
-    exerciseText.textContent = exerciseMinutes;
-    goalText.textContent = exerciseGoal;
+    //exerciseText.textContent = exerciseMinutes;
+    //goalText.textContent = exerciseGoal;
 
     if (percentage <= 100) {
         // Only animate the green ring up to 100%
