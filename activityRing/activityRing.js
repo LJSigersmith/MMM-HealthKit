@@ -32,7 +32,7 @@ export function createActivityRing(exerciseMinutes, exerciseGoal) {
             <circle class="progress-ring-overflow" cx="60" cy="60" r="50"
                 stroke-dasharray="314" stroke-dashoffset="314" />
             <text x="50%" y="50%" text-anchor="middle" dy=".3em" class="progress-text">
-                <tspan id="exercise-text">${exerciseMinutes}</tspan> / <tspan id="goal-text">${exerciseGoal}</tspan>
+                <tspan id="exercise-text">20</tspan> / <tspan id="goal-text">20</tspan>
             </text>
         </svg>
     `;
@@ -53,27 +53,27 @@ export function createActivityRing(exerciseMinutes, exerciseGoal) {
     goalText.textContent = exerciseGoal;
 
     if (percentage <= 100) {
-        // ✅ Only animate the green ring up to 100%
+        // Only animate the green ring up to 100%
         animateProgress(ring, parseFloat(ring.style.strokeDashoffset) || circumference, newOffset, 1000);
         ring.style.stroke = "#00cc66"; // Green
-        overflowRing.style.opacity = "0"; // 🔥 Ensure overflow ring is fully hidden
+        overflowRing.style.opacity = "0"; //Ensure overflow ring is fully hidden
     } else {
-        // ✅ Step 1: Fully fill the green ring first
+        // Step 1: Fully fill the green ring first
         animateProgress(ring, parseFloat(ring.style.strokeDashoffset) || circumference, 0, 1000, () => {
-            console.log("✅ Green ring animation completed!");
+            console.log("Green ring animation completed!");
 
-            // ✅ Step 2: Ensure overflow ring is fully hidden before showing it
-            overflowRing.style.opacity = "0"; // 🔥 Ensure it's hidden at this point
+            // Step 2: Ensure overflow ring is fully hidden before showing it
+            overflowRing.style.opacity = "0"; //Ensure it's hidden at this point
             overflowRing.style.strokeDashoffset = circumference; // Reset overflow position
 
-            // ✅ Step 3: Add an additional delay before revealing the overflow ring
+            // Step 3: Add an additional delay before revealing the overflow ring
             setTimeout(() => {
-                console.log("🔥 Now starting overflow animation!");
-                overflowRing.style.opacity = "1"; // 🔥 Now show overflow ring
+                console.log(" Now starting overflow animation!");
+                overflowRing.style.opacity = "1"; //Now show overflow ring
 
                 let overflowOffset = circumference - ((percentage - 100) / 100 * circumference);
                 animateProgress(overflowRing, circumference, overflowOffset, 1000);
-            }, 750); // 🔥 Adjust this delay to fine-tune the appearance
+            }, 750); //Adjust this delay to fine-tune the appearance
         });
 
         overflowRing.style.stroke = "#ff9900"; // Orange
