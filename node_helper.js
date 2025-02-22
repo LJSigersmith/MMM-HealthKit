@@ -1,33 +1,61 @@
 
 const NodeHelper = require("node_helper");
-const express = require("express");
-const bodyParser = require("body-parser");
+const axios = require("axios");
+const { spawn } = require("child_process");
 
 module.exports = NodeHelper.create({
     start: function () {
-        this.healthData = null;
+        this.healthData = null; // Store the health data
+        console.log("MMM-HealthKit helper started!");
 
-        // set up express server to recieve data
-        this.expressApp = express();
-        this.expressApp.use(bodyParser.json());
-
-        // Endpoint to recieve HealthKit data
-        this.expressApp.post("/healthData", (req, res) => {
-            console.log("Recieved HealthKit data:", req.body);
-            this.healthData = req.body; // store data
-            this.sendSocketNotification("HEALTH_DATA", this.healthData);
-            res.status(200).send({ message: "Data recieved successfully" });
+        // Start local server.js
+        this.serverProcess = spawn("node", ["server.js"], {
+            cwd: __dirname, //ensure it runs from module's directory
+            detached: true, // Keep process running independently
+            stdio: ["ignore", "pipe", "pipe"],
         });
 
-        // Start server
-        this.expressApp.listen(8080, () => {
-            console.log("MMM-HealthKit helper listening on port 8080.");
+        // Log server output
+        this.serverProcess.stdout.on("data", (data) => {
+            console.log(`Server: ${data.toString()}`);
         });
+
+        this.serverProcess.stderr.on("data", (data) => {
+            console.error(`Server Error: ${data.toString()}`);
+        });
+
+        this.serverProcess.on("close", (code) => {
+            console.log(`Server process exited with code ${code}`);
+        });
+
     },
 
-    socketNotificationRecieved: function (notification, payload) {
+    stop: function () {
+        if (this.serverProcess) {
+            console.log("Stopping server...");
+            this.serverProcess.kill(); // terminate server process
+            this.serverProcess = null;
+        }
+    },
+
+
+    socketNotificationReceived: function (notification, payload) {
         if (notification === "REQUEST_HEALTH_DATA") {
-            this.sendSocketNotification("HEALTH_DATA", this.healthData);
+            console.log("Received REQUEST_HEALTH_DATA notification.");
+
+            // Fetch data from the remote server
+            axios
+                .get("http://localhost:3000/healthData") // Replace with your server IP and port
+                .then((response) => {
+                    this.healthData = response.data; // Store the fetched data
+                    console.log("Fetched data from remote server:", this.healthData);
+
+                    // Send the data to the MagicMirror module
+                    this.sendSocketNotification("HEALTH_DATA", this.healthData);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data from remote server:", error.message);
+                });
         }
     }
 });
