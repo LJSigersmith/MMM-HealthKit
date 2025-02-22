@@ -20,7 +20,7 @@ function animateProgress(ring, fromOffset, toOffset, duration, callback) {
     requestAnimationFrame(step);
 }
 
-export function createActivityRing(exerciseMinutes, exerciseGoal) {
+function createActivityRing(exerciseMinutes, exerciseGoal) {
 
     //const container = document.createElement("div");
     //container.classList.add("progress-container");
